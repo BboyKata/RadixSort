@@ -46,6 +46,7 @@ void visualizza(int V[], int c){
         }
         cout<<" ";
     }
+    cout<<endl;
 }
 
 void azzeraMat(int M[10][DIM]){
@@ -57,11 +58,24 @@ void azzeraMat(int M[10][DIM]){
 }
 
 void accatasta(int V[], int M[10][DIM], int R[], int k){
-
+    int p,m,temp;
+    for(int l=0;l<DIM;l++){
+        p = pow(10,k+1);
+        m = pow(10,k);
+        temp = (V[l]%p)/m;
+        M[temp][R[temp]] = V[l];
+        R[temp]++;
+    }
 }
 
 void riposiziona(int V[], int M[10][DIM], int R[]){
-
+    int cont = 0;
+    for(int i=0;i<10;i++){
+        for(int j=0;j<R[i];j++){
+            V[cont]=M[i][j];
+            cont++;
+        }
+    }
 }
 
 void visualizzaMat(int M[10][DIM], int c, int R[]){
@@ -83,6 +97,7 @@ void visualizzaMat(int M[10][DIM], int c, int R[]){
         }
         cout<<endl;
     }
+    cout<<endl;
 }
 
 void azzeraVet(int R[]){
@@ -99,6 +114,7 @@ void radixSort(int V[]){
         accatasta(V,M,R,k);
         visualizzaMat(M,k,R);
         riposiziona(V,M,R);
+        visualizza(V,k);
     }
 }
 
@@ -106,5 +122,8 @@ int main()
 {
     int V[DIM];
     generaNumeri(V);
+    visualizza(V,4);
+    radixSort(V);
+    visualizza(V,4);
     return 0;
 }
